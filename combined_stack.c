@@ -1,10 +1,12 @@
 #include<stdio.h>
 #include<stdlib.h> // for malloc & free
+#include<stdbool.h>
 
 typedef struct
 {
     char *collection;
     int capacity;
+    int size;
     int top;
     int underflow;
     int overflow;
@@ -29,6 +31,8 @@ stack* newStack(int capacity)
 
     // the rest of initialization steps
     s->capacity = capacity;
+    s->size = 0;
+
     s->top = -1;
     s->overflow = 0;
     s->underflow = 0;
@@ -55,9 +59,27 @@ int isEmpty(stack *s)
     // mohab
 }
 
-int push(stack *s, char item) // return true if the item is successfully pushed !
+void push(stack *s, char item) // insert item into stack
 {
-    // diaa
+    if(isFull(s)){
+        s->overflow = 1;
+    }else {
+        s->top++;
+        s->collection[s->top] = item;
+
+    }
+}
+
+
+char getTop(stack *s){
+
+    if(s->top == -1){
+        printf_s("%s%", "stack is empty");
+        return '\0';
+    }
+
+    return s->collection[s->top];
+
 }
 
 char pop(stack *s)
@@ -66,7 +88,7 @@ char pop(stack *s)
     if(s->top == -1)
     {
         s->underflow = 1;
-        return(NULL);
+        return '\0';
     }
     char popped = s->collection[s->top];
     s->top = s->top - 1;
@@ -98,7 +120,7 @@ void str_invertion(char str[], int size)
 
     for(int i = 0; i < size; i++)
     {
-        print(pop(s));
+        printf_s("%d%",pop(s));
     }
 }
 
@@ -107,7 +129,12 @@ int main()
     // stack creation
     stack *s = newStack(5);
 
+    push(s, '(');
+
+    printf_s("%c%", getTop(s));
     // testing here
+
+
 
     // freeing memory
     destroyStack(s);   
