@@ -38,6 +38,8 @@ stack* newStack(int capacity)
 
 void destroyStack(stack *s)
 {
+    free(s->collection);
+    free(s);
     // mohab
 }
 
@@ -49,6 +51,7 @@ int isFull(stack *s)
 
 int isEmpty(stack *s)
 {
+    return(s->size==0);
     // mohab
 }
 
