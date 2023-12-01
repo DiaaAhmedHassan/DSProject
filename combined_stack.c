@@ -57,9 +57,16 @@ int push(stack *s, int item) // return true if the item is successfully pushed !
     // diaa
 }
 
-int pop(stack *s)
+int pop(stack *s, int* item)
 {
     //youssef
+    if(s->top == -1)
+    {
+        s->underflow = 1;
+        return(0);
+    }
+    s->top = s->top - 1;
+    return 1;
 }
 
 int peak(stack *s, int *item) // return via "pass by pointer", the item at the top of the stack
@@ -70,10 +77,16 @@ int peak(stack *s, int *item) // return via "pass by pointer", the item at the t
 int getStackSize(stack *s)
 {
     // youssef
-    return(s->top + 1);
+    return(s->top - 1);
 }
 
 int main()
 {
-    
+    // stack creation
+    stack *s = newStack(5);
+
+    // testing here
+
+    // freeing memory
+    destroyStack(s);   
 }
