@@ -169,7 +169,7 @@ int main()
     if(pNumber == 1){
         //problem 1 code
         char str[] = "";
-        printf_s("%s", "enter brackets: ");
+        printf_s("%s", "enter brackets: ");o
         scanf_s("%s", str, _countof(str));
         int size = sizeof(str) / sizeof(str[0]);
         printf("balanced? %s", (isbalanced(str, size)? "yes" : "no"));
