@@ -18,6 +18,4 @@ struct stack {
 
 int main() {
 	stack<int> s;
-
-
 }

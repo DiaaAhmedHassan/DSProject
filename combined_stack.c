@@ -50,6 +50,7 @@ void destroyStack(stack *s)
 
 int isFull(stack *s)
 {
+    return (s->top == -1);
     // mahmoud
 }
 
@@ -98,6 +99,12 @@ char pop(stack *s)
 int peak(stack *s, char *item) // return via "pass by pointer", the item at the top of the stack
 {
     //mahmoud
+    if (isEmpty(s)){
+        return 0;
+    }
+
+    *item = s->collection[s->top];
+    return 1;
 }
 
 int getStackSize(stack *s)
