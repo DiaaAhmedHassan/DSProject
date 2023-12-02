@@ -120,35 +120,79 @@ void str_invertion(char str[], int size)
     }
 }
 
+bool pair(char open, char close){
+	if(open == '(' && close == ')')return true;
+	else if(open == '{' && close == '}')return(1);
+	else if(open == '[' && close == ']')return(1);
+ 	return(0);
+}
+
+
+int isbalanced (char str[], int size)
+{
+ 	stack *open_brackets = newStack(size);
+	
+    for(int i = 0; i < size; i++)
+    {
+        if(str[i]=='(' || str[i]=='{' || str[i]=='[')
+        {
+            push(open_brackets, str[i]);
+        }
+	    else if(str[i] == ')' || str[i] == '}' || str[i] == ']')
+        {
+            if(isEmpty(open_brackets))
+            {
+                return(0);
+            }
+		    else if(pair(peak(open_brackets), str[i]) == 0)
+            {
+                return(0);
+            }
+
+		    pop(open_brackets);
+        }
+    }
+	   
+    int ans = isEmpty(open_brackets);
+    return(ans);
+}
+
 int main()
 {
     // stack creation
     stack *s = newStack(5);
 
     // testing here
-    printf("is it empty ? %s \n", (isEmpty(s))? "yes": "no");
+    // printf("is it empty ? %s \n", (isEmpty(s))? "yes": "no");
 
-    push(s, 'e');
-    printf("pushed a character, and it's the character %c \n", peak(s));
+    // push(s, 'e');
+    // printf("pushed a character, and it's the character %c \n", peak(s));
 
-    push(s, 'n');
-    printf("is it full ? %s \n", (isFull(s))? "yes": "no");
+    // push(s, 'n');
+    // printf("is it full ? %s \n", (isFull(s))? "yes": "no");
     
-    push(s, 'e');
-    push(s, 'm');
-    push(s, 'y');
+    // push(s, 'e');
+    // push(s, 'm');
+    // push(s, 'y');
     
-    printf("is it full ? %s \n", (isFull(s))? "yes": "no");
+    // printf("is it full ? %s \n", (isFull(s))? "yes": "no");
     
-    printf("stack size: %d\n", getStackSize(s));
+    // printf("stack size: %d\n", getStackSize(s));
 
-    printf("%c", pop(s));
-    printf("%c", pop(s));
-    printf("%c", pop(s));
-    printf("%c", pop(s));
-    printf("%c\n", pop(s));
+    // printf("%c", pop(s));
+    // printf("%c", pop(s));
+    // printf("%c", pop(s));
+    // printf("%c", pop(s));
+    // printf("%c\n", pop(s));
 
-    printf("is it empty ? %s \n", (isEmpty(s))? "yes": "no");
+    // printf("is it empty ? %s \n", (isEmpty(s))? "yes": "no");
+    
+    // problem 1 testing
+    char str[] = "({[]]})";
+    int size = sizeof(str) / sizeof(str[0]);
+
+    printf("balanced? %s", (isbalanced(str, size)? "yes" : "no"));
+
     // freeing memory
     destroyStack(s);   
 }
