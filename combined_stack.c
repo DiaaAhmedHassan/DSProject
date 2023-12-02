@@ -84,7 +84,7 @@ char pop(stack *s)
     return popped;
 }
 
-int peak(stack *s)
+char peak(stack *s)
 {
     //mahmoud
     if (isEmpty(s)){
@@ -160,38 +160,82 @@ int isbalanced (char str[], int size)
 int main()
 {
     // stack creation
-    stack *s = newStack(5);
+    stack *s = newStack(100);
 
-    // testing here
-    // printf("is it empty ? %s \n", (isEmpty(s))? "yes": "no");
+    printf_s("%s%", "Enter problem number \n number 1 for brackets problem \n number 2 for reverse string problem: \n");
+    int pNumber = 0;
+    scanf_s("%d", &pNumber,": ");
 
-    // push(s, 'e');
-    // printf("pushed a character, and it's the character %c \n", peak(s));
+    if(pNumber == 1){
+        //problem 1 code
+        char str[] = "";
+        printf_s("%s", "enter brackets: ");
+        scanf_s("%s", str, _countof(str));
+        int size = sizeof(str) / sizeof(str[0]);
+        printf("balanced? %s", (isbalanced(str, size)? "yes" : "no"));
 
-    // push(s, 'n');
-    // printf("is it full ? %s \n", (isFull(s))? "yes": "no");
-    
-    // push(s, 'e');
-    // push(s, 'm');
-    // push(s, 'y');
-    
-    // printf("is it full ? %s \n", (isFull(s))? "yes": "no");
-    
-    // printf("stack size: %d\n", getStackSize(s));
+    }else if (pNumber == 2){
 
-    // printf("%c", pop(s));
-    // printf("%c", pop(s));
-    // printf("%c", pop(s));
-    // printf("%c", pop(s));
-    // printf("%c\n", pop(s));
+        //problem 2 code
+        char word[100] = "";
+        printf_s("%s", "Enter word to reverse: ");
+        scanf_s("%s", word);
+        int length = sizeof(word);
 
-    // printf("is it empty ? %s \n", (isEmpty(s))? "yes": "no");
-    
+        for (int i = 0; i<length; i++){
+                push(s, word[i]);
+
+        }
+
+        //printf("is it empty ? %s \n", (isEmpty(s))? "yes": "no");
+
+        while (!isEmpty(s)){
+            if(peak(s) == '\0'){
+
+                pop(s);
+                continue;
+            }else {
+                printf("%c", pop(s));
+            }
+        }
+
+//        push(s, 'e');
+//        printf("pushed a character, and it's the character %c \n", peak(s));
+//
+//        push(s, 'n');
+//        printf("is it full ? %s \n", (isFull(s))? "yes": "no");
+//
+//        push(s, 'e');
+//        push(s, 'm');
+//        push(s, 'y');
+//
+//        printf("is it full ? %s \n", (isFull(s))? "yes": "no");
+//
+//        printf("stack size: %d\n", getStackSize(s));
+//
+//        printf("%c", pop(s));
+//        printf("%c", pop(s));
+//        printf("%c", pop(s));
+//        printf("%c", pop(s));
+//        printf("%c\n", pop(s));
+//
+//        printf("is it empty ? %s \n", (isEmpty(s))? "yes": "no");
+
+
+    }else{
+        printf_s("%s%", "problem not exist");
+    }
+
     // problem 1 testing
-    char str[] = "({[]]})";
-    int size = sizeof(str) / sizeof(str[0]);
+//
+//
+//
+//
 
-    printf("balanced? %s", (isbalanced(str, size)? "yes" : "no"));
+
+    // problem2
+
+
 
     // freeing memory
     destroyStack(s);   
