@@ -6,7 +6,6 @@ typedef struct
 {
     char *collection;
     int capacity;
-    int size;
     int top;
     int underflow;
     int overflow;
@@ -18,10 +17,10 @@ stack* newStack(int capacity)
     //memory allocation
     if(capacity <= 0) return NULL;
     
-    stack *s = malloc(sizeof(stack));
+    stack *s = (stack*) malloc(sizeof(stack));
     if(s == NULL) return NULL; // in case of allocation errors
 
-    s->collection = malloc(sizeof(char) * capacity);
+    s->collection = (char*) malloc(sizeof(char) * capacity);
     
     if(s->collection == NULL) // in case of allocation errors
     {
@@ -31,8 +30,6 @@ stack* newStack(int capacity)
 
     // the rest of initialization steps
     s->capacity = capacity;
-    s->size = 0;
-
     s->top = -1;
     s->overflow = 0;
     s->underflow = 0;
@@ -42,45 +39,35 @@ stack* newStack(int capacity)
 
 void destroyStack(stack *s)
 {
+    // mohab
     free(s->collection);
     free(s);
-    // mohab
 }
 
 
 int isFull(stack *s)
 {
-    return (s->top == -1);
+    return ((s->top + 1) == s->capacity);
     // mahmoud
 }
 
 int isEmpty(stack *s)
 {
-    return(s->size==0);
+    return(s->top == -1);
     // mohab
 }
 
 void push(stack *s, char item) // insert item into stack
 {
+    //diaa
     if(isFull(s)){
         s->overflow = 1;
+        printf("\n overflow error \n");
     }else {
         s->top++;
         s->collection[s->top] = item;
 
     }
-}
-
-
-char getTop(stack *s){
-
-    if(s->top == -1){
-        printf_s("%s%", "stack is empty");
-        return '\0';
-    }
-
-    return s->collection[s->top];
-
 }
 
 char pop(stack *s)
@@ -89,6 +76,7 @@ char pop(stack *s)
     if(s->top == -1)
     {
         s->underflow = 1;
+        printf("\n underflow error \n");
         return '\0';
     }
     char popped = s->collection[s->top];
@@ -96,21 +84,22 @@ char pop(stack *s)
     return popped;
 }
 
-int peak(stack *s, char *item) // return via "pass by pointer", the item at the top of the stack
+int peak(stack *s)
 {
     //mahmoud
     if (isEmpty(s)){
-        return 0;
+        printf("empty stack \n");
+        return '\0';
     }
 
-    *item = s->collection[s->top];
-    return 1;
+    return(s->collection[s->top]);
 }
 
 int getStackSize(stack *s)
 {
     // youssef
-    return(s->top - 1);
+    int size = s->top + 1;
+    return(size);
 }
 
 // ------------ problems -------------
@@ -136,13 +125,30 @@ int main()
     // stack creation
     stack *s = newStack(5);
 
-    push(s, '(');
-
-    printf_s("%c%", getTop(s));
     // testing here
+    printf("is it empty ? %s \n", (isEmpty(s))? "yes": "no");
 
+    push(s, 'e');
+    printf("pushed a character, and it's the character %c \n", peak(s));
 
+    push(s, 'n');
+    printf("is it full ? %s \n", (isFull(s))? "yes": "no");
+    
+    push(s, 'e');
+    push(s, 'm');
+    push(s, 'y');
+    
+    printf("is it full ? %s \n", (isFull(s))? "yes": "no");
+    
+    printf("stack size: %d\n", getStackSize(s));
 
+    printf("%c", pop(s));
+    printf("%c", pop(s));
+    printf("%c", pop(s));
+    printf("%c", pop(s));
+    printf("%c\n", pop(s));
+
+    printf("is it empty ? %s \n", (isEmpty(s))? "yes": "no");
     // freeing memory
     destroyStack(s);   
 }
