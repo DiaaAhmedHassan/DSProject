@@ -116,7 +116,12 @@ void str_invertion(char str[], int size)
 
     for(int i = 0; i < size; i++)
     {
-        printf_s("%d%",pop(s));
+        if(peak(s) == '\0'){
+            pop(s);
+            continue;
+        }else {
+            printf_s("%c%", pop(s));
+        }
     }
 }
 
@@ -169,7 +174,7 @@ int main()
     if(pNumber == 1){
         //problem 1 code
         char str[] = "";
-        printf_s("%s", "enter brackets: ");o
+        printf_s("%s", "enter brackets: ");
         scanf_s("%s", str, _countof(str));
         int size = sizeof(str) / sizeof(str[0]);
         printf("balanced? %s", (isbalanced(str, size)? "yes" : "no"));
@@ -180,60 +185,35 @@ int main()
         char word[100] = "";
         printf_s("%s", "Enter word to reverse: ");
         scanf_s("%s", word);
-        int length = sizeof(word);
 
-        for (int i = 0; i<length; i++){
-                push(s, word[i]);
+        str_invertion(word, 50);
 
-        }
+/*        push(s, 'e');
+        printf("pushed a character, and it's the character %c \n", peak(s));
 
-        //printf("is it empty ? %s \n", (isEmpty(s))? "yes": "no");
+        push(s, 'n');
+        printf("is it full ? %s \n", (isFull(s))? "yes": "no");
 
-        while (!isEmpty(s)){
-            if(peak(s) == '\0'){
+        push(s, 'e');
+        push(s, 'm');
+        push(s, 'y');
 
-                pop(s);
-                continue;
-            }else {
-                printf("%c", pop(s));
-            }
-        }
+        printf("is it full ? %s \n", (isFull(s))? "yes": "no");
 
-//        push(s, 'e');
-//        printf("pushed a character, and it's the character %c \n", peak(s));
-//
-//        push(s, 'n');
-//        printf("is it full ? %s \n", (isFull(s))? "yes": "no");
-//
-//        push(s, 'e');
-//        push(s, 'm');
-//        push(s, 'y');
-//
-//        printf("is it full ? %s \n", (isFull(s))? "yes": "no");
-//
-//        printf("stack size: %d\n", getStackSize(s));
-//
-//        printf("%c", pop(s));
-//        printf("%c", pop(s));
-//        printf("%c", pop(s));
-//        printf("%c", pop(s));
-//        printf("%c\n", pop(s));
-//
-//        printf("is it empty ? %s \n", (isEmpty(s))? "yes": "no");
+        printf("stack size: %d\n", getStackSize(s));
+
+        printf("%c", pop(s));
+        printf("%c", pop(s));
+        printf("%c", pop(s));
+        printf("%c", pop(s));
+        printf("%c\n", pop(s));
+
+        printf("is it empty ? %s \n", (isEmpty(s))? "yes": "no");*/
 
 
     }else{
         printf_s("%s%", "problem not exist");
     }
-
-    // problem 1 testing
-//
-//
-//
-//
-
-
-    // problem2
 
 
 
