@@ -149,17 +149,18 @@ int isbalanced (char str[], int size)
             {
                 return(0);
             }
-		    else if(pair(peak(open_brackets), str[i]) == 0)
-            {
-                return(0);
-            }
 
-		    pop(open_brackets);
+		    char popped = pop(open_brackets);
+
+            if((str[i]==')' && popped != '(') ||
+                    (str[i]=='}' && popped != '{') ||
+                            (str[i]==']' && popped != '[')){
+                return 0; // unbalanced if brackets don't match
+            }
         }
     }
-	   
-    int ans = isEmpty(open_brackets);
-    return(ans);
+
+    return isEmpty(open_brackets);
 }
 
 int main()
@@ -173,7 +174,7 @@ int main()
 
     if(pNumber == 1){
         //problem 1 code
-        char str[] = "";
+        char str[100] = "";
         printf_s("%s", "enter brackets: ");
         scanf_s("%s", str, _countof(str));
         int size = sizeof(str) / sizeof(str[0]);
