@@ -136,18 +136,18 @@ int removeRear(Deque *d){ //Diaa
         return(-1);
     }
     int val = d->rear->data;
-    node *oldRare = d->rear;
+    node *oldRear = d->rear;
 
     if(d->size == 1)
     {
         d->front = NULL;
         d->rear = NULL;
-        free(oldRare);
+        free(oldRear);
     }
     else
     {
         d->rear = d->rear->prev;
-        free(oldRare);
+        free(oldRear);
         d->rear->next = NULL;
     }
     d->size--;
@@ -161,9 +161,51 @@ int size(Deque *d) // Diaa
 }
 
 
-int getFirstPosition(int value);
-int getLastPosition(int value);
-int getCount();
+int getFirstPosition(Deque *d, int value){ //Mahmoud Reda
+    if(isEmpty(d)){
+        return -1;
+    }
+    int pos=1;
+    node *current=d->front;
+
+    while(current!=NULL){
+        if(current->data==value){
+            return pos;
+        }
+        current=current->next;
+        pos++;
+    }
+    return -1;
+
+}
+int getLastPosition(Deque *d, int value){ //Mahmoud Reda
+    if(isEmpty(d)){
+        return -1;
+    }
+    int pos=d->size;
+    node *current=d->rear;
+
+    while(current!=NULL){
+        if(current->data==value){
+            return pos;
+        }
+        current=current->prev;
+        pos--;
+    }
+    return -1;
+}
+int getCount(Deque *d, int value){ //Mahmoud Reda
+    int count = 0;
+    node *current=d->front;
+
+    while (current!=NULL){
+        if(current->data==value){
+            count++;
+        }
+        current=current->next;
+    }
+    return count;
+}
 
 int getMin(Deque *d) // Youssef
 {
@@ -275,9 +317,13 @@ int main()
     }
     printf("\n"); // 10 9 5
 
-
     printf("min: %d\n" ,getMin(d));
     printf("max: %d\n" ,getMax(d));
+
+    printf("getFirstPosition: %d\n" , getFirstPosition(d,10));
+    printf("getLastPosition: %d\n" , getLastPosition(d,10));
+    printf("getCount: %d\n" , getCount(d,9));
+
 
     return(0);
 }
