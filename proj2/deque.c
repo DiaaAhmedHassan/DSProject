@@ -161,7 +161,8 @@ int size(Deque *d) // Diaa
 }
 
 
-int getFirstPosition(Deque *d, int value){ //Mahmoud Reda
+int getFirstPosition(Deque *d, int value) // Mahmoud Reda
+{
     if(isEmpty(d)){
         return -1;
     }
@@ -178,7 +179,8 @@ int getFirstPosition(Deque *d, int value){ //Mahmoud Reda
     return -1;
 
 }
-int getLastPosition(Deque *d, int value){ //Mahmoud Reda
+int getLastPosition(Deque *d, int value) // Mahmoud Reda
+{
     if(isEmpty(d)){
         return -1;
     }
@@ -194,7 +196,8 @@ int getLastPosition(Deque *d, int value){ //Mahmoud Reda
     }
     return -1;
 }
-int getCount(Deque *d, int value){ //Mahmoud Reda
+int getCount(Deque *d, int value) // Mahmoud Reda
+{
     int count = 0;
     node *current=d->front;
 
@@ -261,10 +264,32 @@ int getKth(Deque *d, int k)// Diaa
     return current->data;    
 }
 
-int linearSearch(int value);
-void printForwards();
-void printBackwards();
-void deleteKth(Deque *d, int k){
+int linearSearch(Deque *d, int value) // Mohab
+{
+    node *ptr = d->rear;
+    int position = d->size;
+    while(ptr != NULL)
+    {        
+        if(ptr->data == value)
+        {
+            return(position);
+        }
+        position--; 
+        ptr = ptr->prev;
+    }
+    return(-1);
+}
+
+void printForwards() // Mohab
+{
+
+}
+void printBackwards() // Mohab
+{
+
+}
+void deleteKth(Deque *d, int k) // Mahmoud Reda
+{
 
 }
 
@@ -316,6 +341,7 @@ int main()
         ptr = ptr->next;
     }
     printf("\n"); // 10 9 5
+    insertRear(d, 10);// 10 9 5 10
 
     printf("min: %d\n" ,getMin(d));
     printf("max: %d\n" ,getMax(d));
@@ -323,6 +349,8 @@ int main()
     printf("getFirstPosition: %d\n" , getFirstPosition(d,10));
     printf("getLastPosition: %d\n" , getLastPosition(d,10));
     printf("getCount: %d\n" , getCount(d,9));
+
+    printf("position: %i\n" ,linearSearch(d, 7));
 
 
     return(0);
