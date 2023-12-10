@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h> // for malloc and free
+#include<stdbool.h>
 
 typedef struct node
 {
     int data;
     struct node *next;
+    struct node *prev;
 }
 node;
 
@@ -70,24 +72,69 @@ void insertRear(Deque *d, int value) // Youssef
     d->rear = n;
     d->size++;
 }
-int removeFront(Deque *d)
+int removeFront(Deque *d) //Diaa
 {
-    //hints:
-    // check for underflow
-    // if not proceed
-    // make a tmp pointer of type node
-    // store d->front->data in a variable called "value" for example
-    // set tmp = d->front
-    // make d->front point at the next node
-    // free tmp
-    //update d->size
-    // return(value);
+    //check the underflow condition
+  if(isEmpty(d)){
+    printf("%s", "underflow error");
+    return NULL;
+  }
+
+ //store current front in a tem variable
+  int val = d->front->data;
+  node *oldFront = d->front;
+
+ //check if the deque has only one element
+  if (d->size == 1)
+  {
+    d->front = NULL;
+    d->rear = NULL;
+  }else{
+//update the front to point to the next node
+  d->front = d->front->next;
+  }
+  free(oldFront);
+
+  d->size--;
+  
     
-    return(0); // delete this
+    return val; 
 }
-int removeRear();
-int size();
-int isEmpty();
+int removeRear(Deque *d){ //Diaa
+
+    if(isEmpty(d)){
+        printf("Under flow error");
+        return NULL;
+    }
+    int val = d->rear->data;
+    node *oldRare = d->rear;
+
+    if(d->size == 1){
+        d->front = NULL;
+        d->rear = NULL;
+    }else{
+        d->rear = d->rear->next;
+    }
+
+    free(oldRare);
+
+    d->size--;
+
+    return val;
+}
+int size(Deque *d){ // Diaa
+    return sizeof(d);
+}
+int isEmpty(Deque *d){//Diaa
+    if (d->front == d->rear)
+    {
+        return true;
+    }else{
+        return false;
+    }
+    
+    
+};
 int getFirstPosition(int value);
 int getLastPosition(int value);
 int getCount();
@@ -123,11 +170,33 @@ int getMax(Deque *d) // Youssef
     return(mx);
 }
 
-int getKth(int k);
+int getKth(Deque *d, int k){ //Diaa
+    if (isEmpty(d) || k <0)
+    {
+        return -1;
+    }
+
+    node *current = d->front;
+    int count = 1;
+
+    while (current != NULL && count<k)
+    {
+        current = current->next;
+        count++;
+    }
+
+    if(current == NULL){
+        return -1;
+    }
+
+    return current->data;    
+}
 int linearSearch(int value);
 void printForwards();
 void printBackwards();
-void deleteKth(int k);
+void deleteKth(Deque *d, int k){
+
+}
 
 int main()
 {
