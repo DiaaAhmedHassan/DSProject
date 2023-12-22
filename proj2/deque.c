@@ -393,6 +393,7 @@ int main()
     printBackwards(d);
     printForwards(d);
     deleteKth(d,2);
+    printForwards(d);
 
     return(0);
 }
