@@ -280,7 +280,7 @@ int linearSearch(Deque *d, int value) // Mohab
     return(-1);
 }
 
-void printForwards(Deque *d) // Mahmoud Reda
+void printForwards(Deque *d) // Mahmoud and Mohab
 {
     node *ptr = d->front;
 
@@ -291,7 +291,7 @@ void printForwards(Deque *d) // Mahmoud Reda
 
     printf("\n");
 }
-void printBackwards(Deque *d) // Mahmoud Reda
+void printBackwards(Deque *d) // Mahmoud and Mohab
 {
     node *ptr = d->rear;
     while (ptr!=NULL)
@@ -302,10 +302,35 @@ void printBackwards(Deque *d) // Mahmoud Reda
 
     printf("\n");
 }
-void deleteKth(Deque *d, int k) // Mahmoud Reda
+void deleteKth(Deque *d, int k) // Mahmoud and Mohab
 {
+    if(isEmpty((d)||k<1||k>d->size){
+        return;
+    }
+    if(k==1){
+        removeFront(d);
+    }
+    else if(k==d->size){
+        removeRear(d);
+    }
+    else{
+        node *current=d->front;
+        int count=1;
 
+        while(count<k&&current!=front) {
+            current=current->next;
+            count++;
+        }
+    }
+    if(current!=NULL){
+        current->prev->next=current->next;
+        current->next->prev=current->prev;
+        free(current);
+        d->size--;
+
+    }
 }
+
 
 int main()
 {
@@ -354,8 +379,8 @@ int main()
         printf("%d ", ptr->data);
         ptr = ptr->next;
     }
-    printf("\n"); // 10 9 5
-    insertRear(d, 10);// 10 9 5 10
+    printf("\n");
+    insertRear(d, 10);
 
     printf("min: %d\n" ,getMin(d));
     printf("max: %d\n" ,getMax(d));
