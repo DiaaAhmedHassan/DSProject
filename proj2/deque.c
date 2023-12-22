@@ -280,13 +280,20 @@ int linearSearch(Deque *d, int value) // Mohab
     return(-1);
 }
 
-void printForwards() // Mohab
+void printForwards(Deque *d) // Mohab
 {
 
 }
-void printBackwards() // Mohab
+void printBackwards(Deque *d) // Mahmoud Reda
 {
+    node *ptr = d->rear;
+    while (ptr!=NULL)
+    {
+        printf("%d", ptr->data);
+        ptr=ptr->prev;
+    }
 
+    printf("\n");
 }
 void deleteKth(Deque *d, int k) // Mahmoud Reda
 {
@@ -352,6 +359,6 @@ int main()
 
     printf("position: %i\n" ,linearSearch(d, 7));
 
-
+    printBackwards(d);
     return(0);
 }
