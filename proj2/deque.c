@@ -366,5 +366,8 @@ int main()
 
     printf("position: %i\n" ,linearSearch(d, 7));
 
+    printBackwards(d);
+    printForwards(d);
+
     return(0);
 }
