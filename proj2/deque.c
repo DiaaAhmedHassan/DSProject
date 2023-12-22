@@ -304,7 +304,7 @@ void printBackwards(Deque *d) // Mahmoud and Mohab
 }
 void deleteKth(Deque *d, int k) // Mahmoud and Mohab
 {
-    if(isEmpty((d)||k<1||k>d->size){
+    if(isEmpty(d) || k < 0||k > d-> size){
         return;
     }
     if(k==1){
@@ -317,17 +317,16 @@ void deleteKth(Deque *d, int k) // Mahmoud and Mohab
         node *current=d->front;
         int count=1;
 
-        while(count<k&&current!=front) {
+        while(count<k&&current!=NULL) {
             current=current->next;
             count++;
         }
-    }
-    if(current!=NULL){
-        current->prev->next=current->next;
-        current->next->prev=current->prev;
+        if(current!=NULL) {
+        current->prev->next = current->next;
+        current->next->prev = current->prev;
         free(current);
         d->size--;
-
+    }
     }
 }
 
@@ -393,6 +392,7 @@ int main()
 
     printBackwards(d);
     printForwards(d);
+    deleteKth(d,2);
 
     return(0);
 }
