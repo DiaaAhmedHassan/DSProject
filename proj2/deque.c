@@ -286,6 +286,7 @@ void printForwards(Deque *d) // Mahmoud and Mohab
 
     while (ptr!=NULL){
         printf("%d", ptr->data);
+        printf(" ");
         ptr=ptr->next;
     }
 
@@ -297,6 +298,7 @@ void printBackwards(Deque *d) // Mahmoud and Mohab
     while (ptr!=NULL)
     {
         printf("%d", ptr->data);
+        printf(" ");
         ptr=ptr->prev;
     }
 
@@ -328,6 +330,34 @@ void deleteKth(Deque *d, int k) // Mahmoud and Mohab
         d->size--;
     }
     }
+}
+void swap(int *a, int *b){
+    int t= *a;
+    *a = *b;
+    *b = t;
+}
+void bubble_sort(Deque *d){
+    if(d->size <= 1){
+        return;
+    }
+    int s;
+    node *ptr;
+    node *last=NULL;
+
+    do{
+        s=0;
+        ptr=d->front;
+
+        while (ptr->next!=last){
+            if (ptr->data>ptr->next->data){
+                swap(&(ptr->data),&(ptr->next->data));
+                s=1;
+            }
+            ptr=ptr->next;
+        }
+        last = ptr;
+    } while (s);
+
 }
 
 
@@ -379,7 +409,7 @@ int main()
         ptr = ptr->next;
     }
     printf("\n");
-    insertRear(d, 10);
+    insertRear(d, 7);
 
     printf("min: %d\n" ,getMin(d));
     printf("max: %d\n" ,getMax(d));
@@ -394,6 +424,15 @@ int main()
     printForwards(d);
     deleteKth(d,2);
     printForwards(d);
+    insertFront(d, 3);
+    insertFront(d, 1);
+    insertFront(d, 2);
+
+    printForwards(d);
+    bubble_sort(d);
+    printForwards(d);
+
+
 
     return(0);
 }
