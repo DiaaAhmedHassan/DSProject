@@ -162,7 +162,6 @@ int isbalanced (char str[], int size)
 
     return isEmpty(open_brackets);
 }
-
 int main()
 {
     // stack creation
@@ -217,7 +216,6 @@ int main()
     }
 
 
-
     // freeing memory
-    destroyStack(s);   
+    //destroyStack(s);
 }
