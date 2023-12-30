@@ -22,25 +22,15 @@ void bubble_sort(int arr[],int n){
 int binarySearch(int arr[], int l, int r, int value)
 {
     if (r >= l) {
-        int mid =  (r + l) / 2;
+        int mid = l+((r - l)/2);
 
         if (arr[mid] == value) {
-
-
-            return mid;
-
-        } if ((l == r) && (arr[l] == value)) {
-            printf("Found at index %d\n", l);
-            return l;
-        }
-        {
-            printf("%d",arr[mid]);
             return mid;
         }
-
         if (arr[mid] > value)
             return binarySearch(arr, l, mid - 1, value);
 
+        if(arr[mid]< value)
         return binarySearch(arr, mid + 1, r, value);
     }
 
@@ -51,13 +41,14 @@ int main(){
 
     int arr[6];
     arr[0]=2;
-    arr[1]=5;
-    arr[2]=5;
-    arr[3]=6;
+    arr[1]=8;
+    arr[2]=6;
+    arr[3]=4;
     arr[4]=3;
     arr[5]=1;
     int n=sizeof(arr)/sizeof(arr[0]);
     bubble_sort(arr,n);
     printf("\n");
-    printf("%d",binarySearch(arr,arr[0],arr[5],6));
+    printf("%s", "found at index: ");
+    printf("%d",binarySearch(arr, 0, 5, 8));
 }
