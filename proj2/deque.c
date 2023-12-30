@@ -359,6 +359,24 @@ void bubble_sort(Deque *d){
     } while (s);
 
 }
+int binarySearch(Deque *d, int left, int right, int x)
+{
+    bubble_sort(d);
+
+    if (right >= left) {
+        int mid = left + (right - left) / 2;
+ 
+                if (d[mid]->data == x)
+            return mid;
+ 
+           if (d[mid] > x)
+            return binarySearch(d, left, mid - 1, x);
+ 
+              return binarySearch(d, mid + 1, right, x);
+    }
+ 
+         return-1;
+} 
 
 
 int main()
